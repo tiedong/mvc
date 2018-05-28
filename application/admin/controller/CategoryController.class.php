@@ -1,25 +1,25 @@
 <?php
 namespace admin\controller;
 use framework\core\Controller;
+use framework\core\Factory;
 /*
  * 分类控制器类，主要负责分类管理这个功能模块
  */
-//require_once './framework/core/Controller.class.php';
 class CategoryController extends Controller
 {
     
     //查询分类列表
     public function indexAction(){
-        die('hello');
         //命令模型查询数据
-        //require_once './framework/core/Factory.class.php';
-        $model = Factory::M('CategoryModel');
+        $model = Factory::M('admin\model\GoodsModel');
         //查询分类列表
-        $cat_list = $model -> cat_select();        
+        $cat_list = $model -> user_select();
+        var_dump($cat_list);
+        exit;
         //命令视图显示数据
         //使用 smarty将分类列表的数据分配过去            
         $this->smarty -> assign('cat_list',$cat_list);
-        $this->smarty -> display('view/cat_list.html');
+        $this->smarty -> display('goods_list.tpl');
     }
     
     //删除分类

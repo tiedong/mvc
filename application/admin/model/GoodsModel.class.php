@@ -7,28 +7,10 @@ use framework\core\Model;
  */
 class GoodsModel extends Model
 {    
-    
-    //增加一个用户
-    public function user_add(){        
-        $sql = "INSERT INTO user VALUES(null,'admin','admin123')";
-        $resulkt = $this->dao -> exec($sql);
-        return $resulkt;
+    //查询用户
+    public function user_select()
+    {
+        $sql = "SELECT * FROM blog_user";
+        return $this->dao->fetchAll($sql);
     }
-    //删除一个用户
-    public function user_delete(){
-        require_once 'DAOPDO.class.php';
-        $option = array(
-            'host' =>   '127.0.0.1',
-            'user' =>   'root',
-            'pass' =>   'root',
-            'dbname' =>   'php_7',
-            'port' =>   3306,
-            'charset' =>   'utf8',
-        );
-        $dao = DAOPDO::getSingleton($option);
-    }
-    //修改一个用户
-    public function user_update(){}
-    //查询一个用户
-    public function user_select(){}
 }

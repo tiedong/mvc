@@ -8,11 +8,21 @@ class Controller
     protected $smarty;
     public function __construct()
     {
-        //require './framework/vendor/smarty/Smarty.class.php';
+        //初始化时区
+        $this->initTimezone();
+        //初始化smarty
+        $this->initSmarty();
+    }
+    public function initTimezone()
+    {
+        date_default_timezone_set('PRC');
+    }
+    public function initSmarty()
+    {
         $this->smarty = new \Smarty();
         $this->smarty -> left_delimiter = '<{';
         $this->smarty -> right_delimiter = '}>';
-        $this->smarty -> setTemplateDir('view/tpl');
-        $this->smarty  -> setCompileDir('view/tpl_c');
+        $this->smarty -> setTemplateDir(APP_PATH.MODULE.'/view/');
+        $this->smarty  -> setCompileDir(APP_PATH.MODULE.'/runtime/tpl_c');
     }
 }

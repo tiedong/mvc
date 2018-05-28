@@ -9,15 +9,7 @@ class Model
     protected $dao;
     public function __construct()
     {
-        //require_once '../dao/DAOPDO.class.php';
-        $option = array(
-            'host' =>   '127.0.0.1',
-            'user' =>   'root',
-            'pass' =>   'root',
-            'dbname' =>   'php_7',
-            'port' =>   3306,
-            'charset' =>   'utf8',
-        );
+        $option = $GLOBALS['config'];
         $this->dao = DAOPDO::getSingleton($option);
     }
 }

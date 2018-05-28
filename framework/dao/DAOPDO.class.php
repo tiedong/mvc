@@ -1,9 +1,8 @@
 <?php
 namespace framework\dao;
 use framework\dao\I_DAO;
-use \PDO;
-use \PDOException;
-
+use PDO;
+use PDOException;
 //首先，类要实现、完成接口规定的内容
 class DAOPDO implements I_DAO
 {
