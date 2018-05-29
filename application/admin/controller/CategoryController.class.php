@@ -12,8 +12,12 @@ class CategoryController extends Controller
     public function indexAction(){
         //命令模型查询数据
         $model = Factory::M('admin\model\GoodsModel');
-        $model->insert(array('goods_name'=>'i7'));
-        die("sc");
+        $data  = array(
+            'user_name'=>"tiedon 'g",
+            'user_pass'  =>"123456"
+        );
+        $model->insert($data);
+        die();
         //查询分类列表
         $cat_list = $model -> user_select();
         var_dump($cat_list);
