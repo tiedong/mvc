@@ -126,4 +126,36 @@ class Model
         $sql .= $str.$where_str;
         return $this->dao->exec($sql);
     }
+
+    //自动查询
+    //参数1：查询的字段列表 $data = array('goods_name','shop_price')
+    //参数2：查询的条件 $where = array('goods_id'=>1)
+    public function find($data=array(),$where=array())
+    {
+        //1. 先判断是否有字段
+        if(!$data){
+            //没有字段列表
+            $fields = '*';
+        }else{
+            //有字段列表
+            $fields = array_map(function($v){
+                return '`'.$v.'`';
+            },$data);
+            $fields = implode(',', $fields);
+        }
+        //2. 确定查询的条件
+        if(!$where){
+            //没有where条件,查询所有数据
+            $sql = "SELECT $fields FROM $this->true_table";
+            //return $this->dao->fetchAll($sql);
+        }else{
+            foreach ($where as $k=>$v){
+                $where_str = '`'.$k.'`='."'$v'";
+            }
+            //根据条件查询，返回1条数据
+            $sql = "SELECT $fields FROM $this->true_table WHERE $where_str";
+            // return $this->dao->fetchRow($sql);
+        }
+        die($sql);
+    }
 }
