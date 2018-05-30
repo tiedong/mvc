@@ -16,7 +16,8 @@ class CategoryController extends Controller
             'user_name'=>"tiedon 'g",
             'user_pass'  =>"123456"
         );
-        $model->insert($data);
+        //$model->insert($data);
+        $model->delete(100);
         die();
         //查询分类列表
         $cat_list = $model -> user_select();

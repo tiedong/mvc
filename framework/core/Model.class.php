@@ -1,17 +1,23 @@
 <?php
-namespace framework\core;
-use framework\dao\DAOPDO;
-/*
+/**
+ * @author tiedong
+ * @email 1095013906@qq.com
+ * @date 2018-05-30
  * 基础模型类，各个模型类中的公共的代码
  */
+namespace framework\core;
+use framework\dao\DAOPDO;
+
 class Model
 {
     protected $dao;
     protected $true_table;
+    protected $pk;
     public function __construct()
     {
         $this->initDAO();
         $this->initTrueTable();
+        $this->initFields();
     }
 
     /**
@@ -24,6 +30,22 @@ class Model
     }
 
     /**
+     * 获取字段值
+     */
+    public function initFields()
+    {
+        echo $sql = "DESC $this->true_table";
+        $result = $this->dao->fetchAll($sql);
+        //遍历二维数组
+        foreach ( $result as $key=>$value ) {
+            if ( $value['Key'] == "PRI" ) {
+
+                $this->pk = $value['Field'];
+            }
+        }
+    }
+
+    /**
      * 初始化表名
      */
     public function initTrueTable()
@@ -32,6 +54,7 @@ class Model
     }
 
     /**
+     * @param  $data 数据
      * 自动插入数据
      */
     public function insert($data)
@@ -57,5 +80,26 @@ class Model
         //执行SQL语句
         $this->dao->exec($sql);
         return $this->dao->lastInsertId();
+    }
+
+    /**
+     * @param  $id 主键id
+     * 自动删除
+     */
+    public function delete($id)
+    {
+        $sql = "delete from $this->true_table WHERE $this->pk=".$id;
+        //执行sql语句
+        return $this->dao->exec($sql);
+    }
+    
+    /**
+     * @param  $data
+     * @param  $where
+     * 自动更新数据
+     */
+    public function update($data,$where=null)
+    {
+        
     }
 }

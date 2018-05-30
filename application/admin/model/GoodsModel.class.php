@@ -8,7 +8,7 @@ use framework\core\Model;
 class GoodsModel extends Model
 {
     //属性表名该模型操作的是哪一张数据表
-    protected $logic_table = 'admin';
+    protected $logic_table = 'user';
     //查询用户
     public function user_select()
     {

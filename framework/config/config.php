@@ -5,10 +5,10 @@ return array(
     'host'              =>  '127.0.0.1',
     'user'              =>  'root',
     'pass'              =>  'root',
-    'dbname'            =>  'blog',
+    'dbname'            =>  'sunny',
     'port'              =>  3306,
     'charset'           =>  'utf8',
-    'table_prefix'      =>  'article_',
+    'table_prefix'      =>  'sy_',
     
     //smarty的配置
     'left_delimiter'    =>  '<{',
