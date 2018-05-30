@@ -34,7 +34,7 @@ class Model
      */
     public function initFields()
     {
-        echo $sql = "DESC $this->true_table";
+        $sql = "DESC $this->true_table";
         $result = $this->dao->fetchAll($sql);
         //遍历二维数组
         foreach ( $result as $key=>$value ) {
@@ -100,6 +100,30 @@ class Model
      */
     public function update($data,$where=null)
     {
-        
+        //sql = "update ecm_goods set goods_name='name' where goods_id=100";
+        //先判断是否有where条件
+        if ( !$where ) {
+            return false;//没有条件立即停止
+        } else {
+            foreach ($where as $k=>$v){
+                $where_str = " WHERE `$k`='$v'";
+            }
+        }
+        $sql = "UPDATE $this->true_table SET ";
+        $fields= array_keys($data);
+        $fields = array_map(function($v){
+            return '`'.$v.'`';
+        },$fields);
+
+        //获取value值
+        $fields_value = array_values($data);
+        $fields_value = array_map(array($this->dao,'quote'),$fields_value);
+        $str = '';//斌接数据
+        foreach ( $fields as $k=>$v ) {
+            $str .= $v.'='.$fields_value[$k].',';
+        }
+        $str = rtrim($str,',');
+        $sql .= $str.$where_str;
+        return $this->dao->exec($sql);
     }
 }
