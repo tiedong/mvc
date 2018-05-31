@@ -10,11 +10,12 @@ class CategoryController extends Controller
     
     //查询分类列表
     public function indexAction(){
+        $model = Factory::M('Goods');
         //命令模型查询数据
-        $model = Factory::M('admin\model\GoodsModel');
+//        $model = Factory::M('admin\model\GoodsModel');
         $data  = array(
-            'user_name'=>"tiedon 'g",
-            'user_pass'  =>"123456"
+            'userName'=>"tiedon 'g",
+            'pwd'  =>"123456"
         );
         //$model->insert($data);
         //$model->delete(100);
